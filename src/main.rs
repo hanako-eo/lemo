@@ -1,20 +1,26 @@
+// FEATURES
+#![feature(riscv_ext_intrinsics)]
+// END FEATURES
 #![no_std]
 #![no_main]
 
+use core::arch::riscv32::nop;
 use core::panic::PanicInfo;
 
 use esp_backtrace as _;
-use esp_hal::{clock::ClockControl, peripherals::Peripherals, prelude::*, Delay};
+use esp_hal::clock::ClockControl;
+use esp_hal::peripherals::Peripherals;
+use esp_hal::prelude::*;
+use esp_hal::systimer::SystemTimer;
+use esp_hal::{Delay, Rng};
 use esp_println::println;
-
 use esp_wifi::{initialize, EspWifiInitFor};
-
-use esp_hal::{systimer::SystemTimer, Rng};
 
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
-    // FIXME: the loop will overwork the microcontroller
-    loop { }
+    loop {
+        nop()
+    }
 }
 
 #[entry]
