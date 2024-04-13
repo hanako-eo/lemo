@@ -1,0 +1,4 @@
+{
+    "rust-analyzer.check.allTargets": false,
+    "rust-analyzer.check.targets": "riscv32imac-unknown-none-elf"
+}
